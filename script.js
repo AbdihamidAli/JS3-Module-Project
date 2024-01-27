@@ -1,8 +1,11 @@
 //You can edit ALL of the code here
+const url = "https://api.tvmaze.com/shows/82/episodes";
+
 
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
+  handleSearch();
 
   document
     .getElementById("searchInput")
@@ -42,12 +45,14 @@ function makePageForEpisodes(episodeList) {
     option.value = index; // Set the index as the value for easy access later
     option.textContent = `${episodeDisplay} - ${episode.name} `;
     selector.appendChild(option);
+    
   });
 
   // Event listener for the dropdown
   selector.addEventListener("change", function () {
     const selectedIndex = this.value;
     navigateToEpisode(episodeList, selectedIndex);
+    
   });
 
   // Display the episodes
@@ -65,6 +70,7 @@ function makePageForEpisodes(episodeList) {
     rootElem.appendChild(episodeElem);
   });
 }
+
 function navigateToEpisode(episodeList, index) {
   // Hide all episodes
   const episodeElements = document.querySelectorAll(".episode-container");
